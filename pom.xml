@@ -36,7 +36,7 @@
         <easyexcel.version>3.2.1</easyexcel.version>
 
         <!-- 对象存储 -->
-        <minio.version>8.5.2</minio.version>
+        <minio.version>8.5.5</minio.version>
         <okhttp3.version>4.8.1</okhttp3.version>
 
         <aliyun-sdk-oss.version>3.16.3</aliyun-sdk-oss.version>
