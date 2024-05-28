@@ -22,7 +22,7 @@
 
         <hutool.version>5.8.26</hutool.version>
 
-        <mysql.version>8.0.28</mysql.version>
+        <mysql.version>8.0.33</mysql.version>
         <druid.version>1.2.16</druid.version>
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
 
