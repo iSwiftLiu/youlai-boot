@@ -20,7 +20,6 @@ spring:
       port: 6379
       # 如果Redis 服务未设置密码，需要将password删掉或注释，而不是设置为空字符串
       password: 123456
-
       timeout: 10s
       lettuce:
         pool:
@@ -41,13 +40,29 @@ spring:
       time-to-live: 3600000
       # 缓存null值，防止缓存穿透
       cache-null-values: true
+  # 邮件配置
+  mail:
+    host: smtp.youlai.tech
+    port: 587
+    username: your-email@example.com
+    password: 123456
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    # 邮件发送者
+    from: youlaitech@163.com
+
 mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
   global-config:
     db-config:
       # 主键ID类型
       id-type: none
       # 逻辑删除字段名称
-      logic-delete-field: deleted
+      logic-delete-field: is_deleted
       # 逻辑删除-删除值
       logic-delete-value: 1
       # 逻辑删除-未删除值
@@ -59,6 +74,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
+
 # 安全配置
 security:
   jwt:
@@ -66,6 +82,7 @@ security:
     key: SecretKey012345678901234567890123456789012345678901234567890123456789
     # JWT 有效期(单位：秒)
     ttl: 7200
+  # 白名单列表
   ignore-urls:
     - /v3/api-docs/**
     - /doc.html
@@ -76,8 +93,8 @@ security:
     - /swagger-ui.html
     - /api/v1/auth/captcha
     - /ws/**
-    - /ws-app/**
 
+# 文件存储配置
 oss:
   # OSS 类型 (目前支持aliyun、minio)
   type: minio
@@ -90,7 +107,7 @@ oss:
     # 凭据密钥
     secret-key: minioadmin
     # 存储桶名称
-    bucket-name: default
+    bucket-name: public
     # (可选)自定义域名，如果配置了域名，生成的文件URL是域名格式，未配置则URL则是IP格式 (eg: https://oss.youlai.tech)
     custom-domain:
   # 阿里云OSS对象存储服务
@@ -104,6 +121,23 @@ oss:
     # 存储桶名称
     bucket-name: default
 
+# 短信配置
+sms:
+  # 阿里云短信
+  aliyun:
+    accessKeyId: LTAI5tSMgfxxxxxxdiBJLyR
+    accessKeySecret: SoOWRqpjtS7xxxxxxZ2PZiMTJOVC
+    domain: dysmsapi.aliyuncs.com
+    regionId: cn-shanghai
+    signName: 有来技术
+    templateCodes:
+      # 注册（预留）
+      register: SMS_22xxx771
+      # 登录（预留）
+      login: SMS_22xxx772
+      # 修改密码
+      changePassword: SMS_22xxx773
+
 # springdoc配置： https://springdoc.org/properties.html
 springdoc:
   swagger-ui:
@@ -113,9 +147,13 @@ springdoc:
   api-docs:
     path: /v3/api-docs
   group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: com.youlai.system.controller
+    - group: '系统管理'
+      paths-to-match: "/**"
+      packages-to-scan:
+        - com.youlai.boot.system.controller
+        - com.youlai.boot.shared.auth.controller
+        - com.youlai.boot.shared.file.controller
+        - com.youlai.boot.shared.codegen.controller
   default-flat-param-object: true
 
 # knife4j 接口文档配置
