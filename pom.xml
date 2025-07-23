@@ -52,11 +52,11 @@
         <ip2region.version>2.7.0</ip2region.version>
 
         <!-- 阿里云短信 -->
-        <aliyun.java.sdk.core.version>4.6.4</aliyun.java.sdk.core.version>
+        <aliyun.java.sdk.core.version>4.7.0</aliyun.java.sdk.core.version>
         <aliyun.java.sdk.dysmsapi.version>2.2.1</aliyun.java.sdk.dysmsapi.version>
 
         <!-- 微信 jdk -->
-        <weixin-java.version>4.5.5.B</weixin-java.version>
+        <weixin-java.version>tmp-build-20250512.032409</weixin-java.version>
         <caffeine.version>2.9.3</caffeine.version>
     </properties>
 
